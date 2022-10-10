@@ -1,0 +1,10 @@
+<Sysmon schemaversion="4.30">
+	<!-- special thanks to @SwiftOnSecurity for this -->
+	<EventFiltering>
+		<RuleGroup name="" groupRelation="or">
+			<DnsQuery onmatch="exclude">
+				<QueryName condition="end with">.thawte.com</QueryName>				<!-- thawte Primary Root CA-->
+			</DnsQuery>
+		</RuleGroup>
+	</EventFiltering>
+</Sysmon>
