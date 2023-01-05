@@ -160,7 +160,7 @@
         <OriginalFileName name="technique_id=T1222,technique_name=File Permissions Modification" condition="is">takeown.exe</OriginalFileName>
         <OriginalFileName name="technique_id=T,technique_name=" condition="is">makecab.exe</OriginalFileName>
         <OriginalFileName name="technique_id=T,technique_name=" condition="is">wusa.exe</OriginalFileName>
-        <OriginalFileName name="technique_id=T1490,technique_name=Inhibit System Recovery" condition="is">vassadmin.exe</OriginalFileName>
+        <OriginalFileName name="technique_id=T1490,technique_name=Inhibit System Recovery" condition="is">vssadmin.exe</OriginalFileName>
         <OriginalFileName name="technique_id=T1033,technique_name=System Owner/User Discovery" condition="contains any">nltest.exe;nltestk.exe</OriginalFileName>
         <OriginalFileName name="technique_id=T1202,technique_name=Indirect Command Execution" condition="is">winrs.exe</OriginalFileName>
         <OriginalFileName name="technique_id=T1548.002,technique_name=Bypass User Account Control" condition="is">computerdefaults.exe</OriginalFileName>
@@ -1026,6 +1026,16 @@
         <SourceImage condition="is">C:\Program Files (x86)\Razer Chroma SDK\bin\RzSDKService.exe</SourceImage>
         <SourceImage condition="is">C:\WINDOWS\CCM\CcmExec.exe</SourceImage>
         <SourceImage condition="is">C:\Program Files\Splunk\bin\splunkd.exe</SourceImage>
+        <Rule groupRelation="and">
+          <SourceImage condition="is">C:\Program Files\Microsoft VS Code\Code.exe</SourceImage>
+          <TargetImage condition="is">C:\Program Files\Microsoft VS Code\Code.exe</TargetImage>
+          <GrantedAccess condition="is">0x100000</GrantedAccess>
+        </Rule>
+        <Rule groupRelation="and">
+          <SourceImage condition="is">C:\Program Files\Microsoft VS Code\Code.exe</SourceImage>
+          <TargetImage condition="is">C:\Program Files\Microsoft VS Code\Code.exe</TargetImage>
+          <GrantedAccess condition="is">0x1401</GrantedAccess>
+        </Rule>
         <SourceImage condition="is">C:\Program Files (x86)\VMware\VMWare Player\vmware-authd.exe</SourceImage>
         <SourceImage condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-authd.exe</SourceImage>
         <SourceImage condition="is">C:\Program Files\WinZip\FAHWindow64.exe</SourceImage>
@@ -2016,8 +2026,10 @@
           <Image condition="begin with">C:\Program Files (x86)\Microsoft\EdgeUpdate\Install\</Image>
           <Image condition="contains">\MicrosoftEdge_X64_</Image>
         </Rule>
+        <Image condition="is">C:\Program Files (x86)\Symantec\Symantec Endpoint Protection Manager\bin\XDelta64\xdelta3.exe</Image>
         <Image condition="contains">unknown process</Image>
         <Image condition="is">C:\Program Files\Microsoft VS Code\Code.exe</Image>
+        <Image condition="is">C:\Windows\System32\wbem\WMIADAP.exe</Image>
       </ProcessTampering>
     </RuleGroup>
     <!-- Event ID 26 == File Delete and overwrite events - Sysmon will not provide notable additional visibility over MDE in the most common folders. Enable for your company specific folders. -->
@@ -2473,6 +2485,13 @@
         <Image condition="is">C:\Program Files\McAfee\Endpoint Security\Threat Prevention\mfeensppl.exe</Image>
         <Image condition="begin with">C:\Program Files\Common Files\McAfee\Engine\scanners</Image>
         <Image condition="is">C:\Program Files\Common Files\McAfee\AVSolution\mcshield.exe</Image>
+        <Image condition="is">C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe</Image>
+        <Image condition="is">C:\Program Files\Windows Defender Advanced Threat Protection\SenseCncProxy.exe</Image>
+        <Image condition="is">C:\Program Files\Windows Defender Advanced Threat Protection\SenseIR.exe</Image>
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files\Microsoft Monitoring Agent\Agent\HealthService.exe</Image>
+          <TargetObject condition="begin with">HKLM\System\CurrentControlSet\Services\HealthService\Parameters\Management Groups</TargetObject>
+        </Rule>
         <Image condition="is">C:\Program Files\ownCloud\owncloud.exe</Image>
         <Image condition="is">C:\Program Files (x86)\ownCloud\owncloud.exe</Image>
         <Rule groupRelation="and">
@@ -2525,6 +2544,9 @@
         <TargetObject condition="end with">\Drive\shellex\DragDropHandlers</TargetObject>
         <TargetObject condition="contains">_Classes\AppX</TargetObject>
         <TargetObject condition="begin with">HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Publishers\</TargetObject>
+        <TargetObject condition="contains all">SOFTWARE;\Microsoft\EnterpriseCertificates\Disallowed</TargetObject>
+        <TargetObject condition="contains all">SOFTWARE;\Microsoft\SystemCertificates\Disallowed</TargetObject>
+        <TargetObject condition="contains">Software\Microsoft\Windows\CurrentVersion\WinTrust\Trust Providers\Software Publishing</TargetObject>
         <TargetObject condition="is">HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\Root\Certificates</TargetObject>
         <Image condition="is">C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe</Image>
         <Image condition="begin with">C:\$WINDOWS.~BT\</Image>
@@ -2533,6 +2555,12 @@
           <Image condition="is">C:\Windows\system32\lsass.exe</Image>
           <TargetObject condition="contains">HKLM\System\CurrentControlSet\Services</TargetObject>
         </Rule>
+        <Rule groupRelation="and">
+          <TargetObject condition="contains">SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization</TargetObject>
+          <Image condition="is">C:\Windows\System32\svchost.exe</Image>
+        </Rule>
+        <TargetObject condition="is">HKLM\System\CurrentControlSet\Services\W32Time\Config\LastKnownGoodTime</TargetObject>
+        <TargetObject condition="is">HKLM\System\CurrentControlSet\Services\SmsRouter\State\Registration\Ids</TargetObject>
         <TargetObject condition="end with">\services\clr_optimization_v2.0.50727_32\Start</TargetObject>
         <TargetObject condition="end with">\services\clr_optimization_v2.0.50727_64\Start</TargetObject>
         <TargetObject condition="end with">\services\clr_optimization_v4.0.30319_32\Start</TargetObject>
