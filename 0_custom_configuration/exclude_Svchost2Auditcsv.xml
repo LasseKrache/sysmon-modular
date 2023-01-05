@@ -1,0 +1,12 @@
+<Sysmon schemaversion="4.30">
+   <EventFiltering>
+      <RuleGroup name="" groupRelation="or">
+         <FileCreate onmatch="exclude">
+            <Rule groupRelation="and">
+               <Image condition="image">C:\Windows\System32\svchost.exe</Image>               <!--Windows generates time stamp for shutdown tracker-->
+               <TargetFilename condition="is">C:\Windows\security\audit\audit.csv</TargetFilename>    <!-- Windows access/reports audit policy here-->
+            </Rule>
+         </FileCreate>
+      </RuleGroup>
+   </EventFiltering>
+</Sysmon>

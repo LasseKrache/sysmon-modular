@@ -1,0 +1,23 @@
+<Sysmon schemaversion="4.30">
+	<EventFiltering>
+		<RuleGroup name="" groupRelation="or">
+			<FileCreate onmatch="exclude">
+				<!--SECTION: ACMP:Server:ACMPServer-->
+				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\ACMPServer.exe</Image>				<!-- ACMP:ACMPServer-->
+				<Image condition="is">C:\Program Files (x86)\ACMPClient\ACMPClientService.exe</Image>				<!-- ACMP:ACMPServer-->
+			</FileCreate>
+		</RuleGroup>
+		<RuleGroup name="" groupRelation="or">
+			<DnsQuery onmatch="exclude">
+				<QueryResults condition="end with">10.4.1.1;</QueryResults>				<!-- local queries-->
+			</DnsQuery>
+		</RuleGroup>
+		<RuleGroup name="" groupRelation="or">
+			<RegistryEvent onmatch="exclude">
+				<!--SECTION: ACMP:Server:ACMPServer-->
+				<Image condition="is">C:\Program Files (x86)\ACMPClient\ACMPClientService.exe</Image>				<!-- ACMP:ACMPServer-->
+				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Console\Bin\ACMPConsole.exe</Image>				<!-- ACMP:ACMPServer-->
+			</RegistryEvent>
+		</RuleGroup>
+	</EventFiltering>
+</Sysmon>
