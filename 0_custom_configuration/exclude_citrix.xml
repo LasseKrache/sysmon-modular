@@ -1,0 +1,48 @@
+<Sysmon schemaversion="4.30">
+	<EventFiltering>
+		<RuleGroup name="" groupRelation="and">
+			<!--- EventID:7-->
+      		<ImageLoad onmatch="exclude">
+			    <Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+        		<ImageLoaded name="technique_id=T1574.002,technique_name=DLL Side-Loading" condition="contains">\Defender\</ImageLoaded>
+			</ImageLoad>
+		</RuleGroup>
+		<RuleGroup name="" groupRelation="or">
+			<!--- EventID:10-->
+        	<ProcessAccess onmatch="exclude">
+            	<SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</SourceImage>
+            	<SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncService.exe</SourceImage>
+         	</ProcessAccess>
+	    </RuleGroup>
+        <RuleGroup name="" groupRelation="and">
+			<!--- EventID:11-->  
+        	<FileCreate onmatch="exclude">
+				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+			</FileCreate>
+        </RuleGroup>
+		<RuleGroup name="" groupRelation="and">
+			<!--- EventID:12-->
+			<RegistryEvent onmatch="exclude">
+				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+			</RegistryEvent>
+		</RuleGroup>
+		<RuleGroup name="" groupRelation="and"> 
+			<!--- EventID:17-->
+      		<PipeEvent onmatch="exclude">
+				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+		    </PipeEvent>
+    	</RuleGroup>
+    	<RuleGroup name="" groupRelation="and">
+			<!--- EventID:22-->
+      		<DnsQuery onmatch="exclude">
+				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+        	</DnsQuery>
+    	</RuleGroup>
+      	<RuleGroup name="" groupRelation="and">
+			<!--- EventID:23-->
+	        <FileDelete onmatch="exclude">
+				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+        	</FileDelete>
+      </RuleGroup>
+	</EventFiltering>
+</Sysmon>
