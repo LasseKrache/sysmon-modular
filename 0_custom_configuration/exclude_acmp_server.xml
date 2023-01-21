@@ -1,34 +1,36 @@
 <Sysmon schemaversion="4.30">
 	<EventFiltering>
+	<!--EventID: 1 - ProcessCreation-->
 	   	<RuleGroup name="" groupRelation="or">
-			<!--EventID: 1 - ProcessCreation-->
 	    	<ProcessCreate onmatch="exclude">
-				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image> 		<!-- ACMP: WUMD-->
+				<Rule groupRelation="or">
+					<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image> 		<!-- ACMP: WUMD-->
+				</Rule>
       		</ProcessCreate>
-    	</RuleGroup>
+    	</RuleGroup>	
+	<!--EventID: 2 - FileCreate-->
 		<RuleGroup name="" groupRelation="or">
-			<!--EventID: 2 - FileCreate-->
 			<FileCreate onmatch="exclude">
 				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\ACMPServer.exe</Image>	<!-- ACMP: ACMPServer-->
 				<Image condition="is">C:\Program Files (x86)\ACMPClient\ACMPClientService.exe</Image>	<!-- ACMP: ACMPClient-->
 				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image> 		<!-- ACMP: WUMD-->
 			</FileCreate>
 		</RuleGroup>
+	<!--EventID: 12-14 - RegistryEvent-->
 		<RuleGroup name="" groupRelation="or">
-			<!--EventID: 12-14 - RegistryEvent-->
 			<RegistryEvent onmatch="exclude">
 				<Image condition="is">C:\Program Files (x86)\ACMPClient\ACMPClientService.exe</Image>			<!-- ACMP:ACMPServer-->
 				<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Console\Bin\ACMPConsole.exe</Image>		<!-- ACMP:ACMPServer-->
 			</RegistryEvent>
 		</RuleGroup>
+	<!--EventID: 22 - DNSQuery-->
 		<RuleGroup name="" groupRelation="or">
-			<!--EventID: 22 - DNSQuery-->
 			<DnsQuery onmatch="exclude">
 				<QueryResults condition="end with">10.4.1.1;</QueryResults>				<!-- local queries-->
 			</DnsQuery>
 		</RuleGroup>
+	<!--EventID: 23 - FileDelete-->
 	    <RuleGroup name="" groupRelation="or">
-			<!--EventID: 23 - FileDelete-->
         <FileDelete onmatch="exclude">
 			<Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image> 		<!-- ACMP: WUMD-->
         </FileDelete>

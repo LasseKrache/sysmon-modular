@@ -2,6 +2,7 @@
 	<!-- special thanks to @SwiftOnSecurity for this -->
 	<EventFiltering>
 		<RuleGroup name="" groupRelation="or">
+			<!--- EventID:22-->
 			<DnsQuery onmatch="exclude">
 				<QueryName condition="contains">mpicc.de</QueryName>				<!--mpicc.de-->
 				<QueryName condition="contains">csl.mpg.de</QueryName>				<!--csl.mpg.de-->

@@ -1,6 +1,7 @@
 <Sysmon schemaversion="4.30">
    <EventFiltering>
       <RuleGroup name="" groupRelation="or">
+			<!--- EventID:2-->
          <FileCreate onmatch="exclude">
             <Rule groupRelation="and">
                <Image condition="image">C:\Windows\System32\svchost.exe</Image>               <!--Windows generates time stamp for shutdown tracker-->

@@ -45,3 +45,24 @@ Bsp.:
 
 ### Eigene Regeln
 Wir haben eine Reihe spezifischer Programme, Verbindungen, etc. die reichlich Logs verursachen, wenn wir diese nicht ausschließen. Als Beispiel sei hier ACMP genannt oder auch die Verbindungen zu spezifischen Adressen (GWDG o.ä.). Um diese aus den Logs auszuschließen, verwenden wir eigene Regeln. Diese Regeln werden in von uns geschriebenen XML-Dateien in diesem Ordner (0_custom_configuration) abgespeichert. Generiert wird die Sysmon-Konfiguration ja bekanntlich über alle XML-Dateien in allen Verzeichnissen - also auch die von uns definierten.
+
+### Log-Daten (Beispiele)
+Network connection detected:
+RuleName: technique_id=T1036,technique_name=Masquerading
+UtcTime: 2023-01-18 12:11:09.535
+ProcessGuid: {12c12966-e1c5-63c7-4c00-000000006800}
+ProcessId: 2220
+Image: C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2211.5-0\MsMpEng.exe
+User: NT AUTHORITY\SYSTEM
+Protocol: tcp
+Initiated: true
+SourceIsIpv6: false
+SourceIp: 10.1.1.10
+SourceHostname: -
+SourcePort: 49763
+SourcePortName: -
+DestinationIsIpv6: false
+DestinationIp: 20.82.19.171
+DestinationHostname: -
+DestinationPort: 443
+DestinationPortName: -

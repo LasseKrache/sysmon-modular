@@ -429,7 +429,9 @@
     <!-- Event ID 1 == Process Creation - Excludes -->
     <RuleGroup groupRelation="or">
       <ProcessCreate onmatch="exclude">
-        <Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image>
+        <Rule groupRelation="or">
+          <Image condition="is">C:\Program Files (x86)\Aagon\ACMP Server\WUMD.exe</Image>
+        </Rule>
         <Rule groupRelation="and">
           <Image condition="end with">AcroRd32.exe</Image>
           <CommandLine condition="contains any">/CR;channel=</CommandLine>
@@ -966,8 +968,14 @@
     <!-- Event ID 10 == ProcessAccess - Excludes -->
     <RuleGroup groupRelation="or">
       <ProcessAccess onmatch="exclude">
-        <SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</SourceImage>
-        <SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncService.exe</SourceImage>
+        <Rule groupRelation="or">
+          <SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</SourceImage>
+          <SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncService.exe</SourceImage>
+          <TargetImage condition="is">C:\Program Files\Citrix\Virtual Desktop Agent\BrokerAgent.exe</TargetImage>
+        </Rule>
+        <Rule groupRelation="and">
+          <win.eventdata.Computername condition="is">T1.mpicc.de</win.eventdata.Computername>
+        </Rule>
         <SourceImage condition="is">C:\Program Files\Adobe\Adobe Creative Cloud Experience\libs\node.exe</SourceImage>
         <SourceImage condition="contains all">C:\Program Files;\Common Files\Adobe\AdobeGCClient\AGMService.exe</SourceImage>
         <SourceImage condition="is">C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe</SourceImage>
@@ -1462,6 +1470,10 @@
         <Image condition="is">C:\Program Files (x86)\ACMPClient\ACMPClientService.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Aagon\ACMP Console\Bin\ACMPConsole.exe</Image>
         <Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+        <Rule groupRelation="and" name="">
+          <Image condition="is">C:\Windows\system32\wbem\wmiprvse.exe</Image>
+          <TargetObject condition="contains">HKLM\System\CurrentControlSet\Services\Citrix</TargetObject>
+        </Rule>
         <Image condition="is">C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\aciseposture.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnagent.exe</Image>
         <Image condition="is">C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe</Image>

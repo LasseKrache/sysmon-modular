@@ -2,6 +2,7 @@
 	<!-- special thanks to @SwiftOnSecurity for this -->
 	<EventFiltering>
 		<RuleGroup name="" groupRelation="or">
+			<!--- EventID:22-->
 			<DnsQuery onmatch="exclude">
 				<QueryName condition="end with">.thawte.com</QueryName>				<!-- thawte Primary Root CA-->
 			</DnsQuery>

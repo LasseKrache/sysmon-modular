@@ -1,45 +1,45 @@
 <Sysmon schemaversion="4.30">
 	<EventFiltering>
-		<RuleGroup name="" groupRelation="and">
-			<!--- EventID:7-->
+		<RuleGroup name="" groupRelation="and">		<!-- EventID:7-->
       		<ImageLoad onmatch="exclude">
 			    <Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
         		<ImageLoaded name="technique_id=T1574.002,technique_name=DLL Side-Loading" condition="contains">\Defender\</ImageLoaded>
 			</ImageLoad>
 		</RuleGroup>
-		<RuleGroup name="" groupRelation="or">
-			<!--- EventID:10-->
+		<RuleGroup name="" groupRelation="and">		<!-- EventID:10-->
         	<ProcessAccess onmatch="exclude">
+			<Rule groupRelation="or">
             	<SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</SourceImage>
             	<SourceImage condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncService.exe</SourceImage>
+				<TargetImage condition="is">C:\Program Files\Citrix\Virtual Desktop Agent\BrokerAgent.exe</TargetImage>	<!-- BrokerAgent: ca. 1.000 Events/h-->
+			</Rule>
          	</ProcessAccess>
 	    </RuleGroup>
-        <RuleGroup name="" groupRelation="and">
-			<!--- EventID:11-->  
+        <RuleGroup name="" groupRelation="and">		<!-- EventID:11-->  
         	<FileCreate onmatch="exclude">
 				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
 			</FileCreate>
         </RuleGroup>
-		<RuleGroup name="" groupRelation="and">
-			<!--- EventID:12-->
+		<RuleGroup name="EventID:12" groupRelation="or">		<!--- EventID:12-->
 			<RegistryEvent onmatch="exclude">
 				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
+	            <Rule groupRelation="and" name="">
+                    <Image condition="is">C:\Windows\system32\wbem\wmiprvse.exe</Image>
+                    <TargetObject condition="contains">HKLM\System\CurrentControlSet\Services\Citrix</TargetObject>
+              </Rule>
 			</RegistryEvent>
 		</RuleGroup>
-		<RuleGroup name="" groupRelation="and"> 
-			<!--- EventID:17-->
+		<RuleGroup name="" groupRelation="and">		<!--- EventID:17-->
       		<PipeEvent onmatch="exclude">
 				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
 		    </PipeEvent>
     	</RuleGroup>
-    	<RuleGroup name="" groupRelation="and">
-			<!--- EventID:22-->
+    	<RuleGroup name="" groupRelation="and">		<!--- EventID:22-->
       		<DnsQuery onmatch="exclude">
 				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
         	</DnsQuery>
     	</RuleGroup>
-      	<RuleGroup name="" groupRelation="and">
-			<!--- EventID:23-->
+      	<RuleGroup name="" groupRelation="and">		<!-- EventID:23-->
 	        <FileDelete onmatch="exclude">
 				<Image condition="is">C:\Program Files\Citrix\ConfigSync\ConfigSyncRun.exe</Image>
         	</FileDelete>

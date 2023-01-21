@@ -2,6 +2,7 @@
    <EventFiltering>
       <RuleGroup name="" groupRelation="or">
          <FileCreate onmatch="exclude">
+			<!--- EventID:2-->
             <Rule groupRelation="and">
                <Image condition="image">C:\Windows\System32\svchost.exe</Image>               <!--Windows generates time stamp for shutdown tracker-->
                <TargetFilename condition="is">C:\Windows\security\audit\audit.csv</TargetFilename>    <!-- Windows access/reports audit policy here-->
