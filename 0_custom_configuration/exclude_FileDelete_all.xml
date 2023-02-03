@@ -1,0 +1,10 @@
+<Sysmon schemaversion="4.30">
+   <EventFiltering>
+      <RuleGroup name="" groupRelation="or">
+         <FileDelete onmatch="exclude">
+            <!-- wir wollen das "Archive" gar nicht verwenden, 23.1.23, cg-->
+            <Image condition="contains all">C:\</Image>  
+         </FileDelete>
+      </RuleGroup>
+   </EventFiltering>
+</Sysmon>
